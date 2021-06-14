@@ -1,16 +1,27 @@
 module Q5 where
 
 mss :: [Int] -> Int
+mss [] = 0
 mss all@(x : xs)
+  | length all == 1 = head all
+  | otherwise = max (mss xs) (calcSum all)
+
+calcSum :: [Int] -> Int
+calcSum [] = 0
+calcSum all@(x : xs)
   | null all = 0
-  | length all == 1 = mss all
-  | otherwise = max culcMss (0 x) (mss xs)
+  | length all == 1 = head all
+  | otherwise = max x (x + calcSum xs)
 
-culcMss :: Int -> Int -> Int
-culcMss z n = do
-  let sum = max z + n n
-  max sum culcMss (z + 1 sum)
+msp :: [Int] -> Int
+msp [] = 0
+msp all@(x : xs)
+  | length all == 1 = head all
+  | otherwise = max (msp xs) (calcProduct all)
 
--- msp :: [Int] -> Int
--- msp [] = 1
--- msp intArray =
+calcProduct :: [Int] -> Int
+calcProduct [] = 0
+calcProduct all@(x : xs)
+  | null all = 0
+  | length all == 1 = head all
+  | otherwise = max x (x * calcProduct xs)
