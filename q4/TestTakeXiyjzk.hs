@@ -12,8 +12,8 @@ case1 :: Test
 case1 =
   TestCase
     ( assertEqual
-        "空リスト"
-        (takeXiyjzk [] [] [])
+        "k == 0"
+        (takeXiyjzk 0 1 2 3)
         []
     )
 
@@ -21,18 +21,27 @@ case2 :: Test
 case2 =
   TestCase
     ( assertEqual
-        "1"
-        (takeXiyjzk [0.0, 100.1] [2.3, 5.6] [1.456, 6.789])
-        [0.0, 1.456, 2.3, 5.6, 6.789, 100.1]
+        "10 2 3 5"
+        (takeXiyjzk 10 2 3 5)
+        [1, 2, 3, 4, 5, 6, 8, 9, 10, 12]
     )
 
 case3 :: Test
 case3 =
   TestCase
     ( assertEqual
-        "1つ目の例で重複が存在する場合"
-        (takeXiyjzk [0.0, 0.0, 100.1] [2.3, 5.6] [1.456, 6.789])
-        [0.0, 1.456, 2.3, 5.6, 6.789, 100.1]
+        "1 100 200 300"
+        (takeXiyjzk 1 100 200 300)
+        [1]
+    )
+
+case4 :: Test
+case4 =
+  TestCase
+    ( assertEqual
+        "3 2 10000 30"
+        (takeXiyjzk 3 2 10000 30)
+        [1, 2, 4]
     )
 
 main :: IO Test.HUnit.Counts
@@ -41,6 +50,7 @@ main =
     ( test
         [ TestLabel "case1" case1,
           TestLabel "case2" case2,
-          TestLabel "case3" case3
+          TestLabel "case3" case3,
+          TestLabel "case4" case4
         ]
     )
