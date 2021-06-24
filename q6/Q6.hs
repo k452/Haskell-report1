@@ -1,11 +1,11 @@
 module Q6 where
 
-data BTree a = BLeaf a | BNode a (BTree a) (BTree a) deriving (Eq, Show)
+data BETree a = BELeaf a | Nil | BENode a (BETree a) (BETree a) deriving (Eq, Show)
 
-data BETree a = BELeaf a | BENode a (TBENode a) (TBENode a)
-
-data TBENode a = BETree a | IO ()
-
-depthBETree :: BETree a -> a
+depthBETree :: Eq a => BETree a -> Int
 depthBETree (BELeaf a) = 1
-depthBETree (BENode a () rt) = depthBETree
+depthBETree Nil = 0
+depthBETree (BENode a lt rt)
+  | lt == Nil = 1 + depthBETree rt
+  | rt == Nil = 1 + depthBETree lt
+  | otherwise = 1 + max (depthBETree lt) (depthBETree rt)
