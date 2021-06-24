@@ -2,6 +2,14 @@ module Q6 where
 
 data BETree a = BELeaf a | Nil | BENode a (BETree a) (BETree a) deriving (Eq, Show)
 
+cataBETree :: Eq t => (t -> BETree a) -> (t -> BETree a -> BETree a -> BETree a) -> BETree t -> BETree a
+cataBETree f g (BELeaf a) = f a
+cataBETree f g Nil = Nil
+cataBETree f g (BENode a lt rt)
+  | lt == Nil = g a Nil (cataBETree f g rt)
+  | rt == Nil = g a (cataBETree f g lt) Nil
+  | otherwise = g a (cataBETree f g lt) (cataBETree f g rt)
+
 depthBETree :: (Ord a, Num a, Eq a) => BETree a -> a
 depthBETree (BELeaf a) = 0
 depthBETree Nil = 0
