@@ -17,7 +17,7 @@ case1 =
     ( assertEqual
         "葉1枚"
         (depthBETree b1)
-        1
+        0
     )
 
 b2 :: BETree Integer
@@ -29,7 +29,7 @@ case2 =
     ( assertEqual
         "葉2枚"
         (depthBETree b2)
-        2
+        1
     )
 
 b3 :: BETree Integer
@@ -41,7 +41,19 @@ case3 =
     ( assertEqual
         "複雑1"
         (depthBETree b3)
-        4
+        3
+    )
+
+b4 :: BETree Integer
+b4 = BENode 5 (BENode 8 (BELeaf 3) (BENode 1 (BELeaf 7) Nil)) (BENode 6 (BENode 2 Nil (BELeaf 9)) (BELeaf 4))
+
+case4 :: Test
+case4 =
+  TestCase
+    ( assertEqual
+        "プリントの例"
+        (depthBETree b4)
+        3
     )
 
 main :: IO Test.HUnit.Counts
@@ -50,6 +62,7 @@ main =
     ( test
         [ TestLabel "case1" case1,
           TestLabel "case2" case2,
-          TestLabel "case3" case3
+          TestLabel "case3" case3,
+          TestLabel "case4" case4
         ]
     )
