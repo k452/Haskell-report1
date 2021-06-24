@@ -17,3 +17,8 @@ sumBETree (BENode a lt rt)
   | lt == Nil = a + sumBETree rt
   | rt == Nil = a + sumBETree lt
   | otherwise = a + sumBETree lt + sumBETree rt
+
+upAccBETree :: (Num a, Eq a) => BETree a -> BETree a
+upAccBETree (BELeaf a) = BELeaf a
+upAccBETree Nil = Nil
+upAccBETree (BENode a lt rt) = BENode (sumBETree (BENode a lt rt)) (upAccBETree lt) (upAccBETree rt)
