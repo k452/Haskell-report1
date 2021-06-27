@@ -2,11 +2,6 @@ module Q7 where
 
 import Data.Bifunctor
 
--- p: 関数。p x がTrueなら空リストを返す
--- f: 関数。f x は配列のhead部
--- g: 関数。g x は次のanaListに渡すx
--- x: 使用する関数の引数
-
 anaList :: (a -> Bool) -> (a -> b) -> (a -> a) -> a -> [b]
 anaList p f g x
   | p x = []
