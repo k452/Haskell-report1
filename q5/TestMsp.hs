@@ -23,7 +23,7 @@ case2 =
     ( assertEqual
         "[3, -4, 2, -1, 6, -3]"
         (msp [3, -4, 2, -1, 6, -3])
-        24
+        144
     )
 
 case3 :: Test
@@ -41,7 +41,7 @@ case4 =
     ( assertEqual
         "[-5, -1, 6, 4, 9, -6, -7]"
         (msp [-5, -1, 6, 4, 9, -6, -7])
-        19
+        45360
     )
 
 case5 :: Test
@@ -50,7 +50,7 @@ case5 =
     ( assertEqual
         "[1, 2, 3, 2, -2, -1, 1, 2, 3, 2, 1, -2, 1]"
         (msp [1, 2, 3, 2, -2, -1, 1, 2, 3, 2, 1, -2, 1])
-        14
+        288
     )
 
 case6 :: Test
@@ -59,7 +59,7 @@ case6 =
     ( assertEqual
         "[1000, -200, 201]"
         (msp [1000, -200, 201])
-        1001
+        1000
     )
 
 main :: IO Test.HUnit.Counts
@@ -68,9 +68,9 @@ main =
     ( test
         [ TestLabel "case1" case1,
           TestLabel "case2" case2,
-          TestLabel "case3" case3
-          -- TestLabel "case4" case4,
-          -- TestLabel "case5" case5,
-          -- TestLabel "case6" case6
+          TestLabel "case3" case3,
+          TestLabel "case4" case4,
+          TestLabel "case5" case5,
+          TestLabel "case6" case6
         ]
     )

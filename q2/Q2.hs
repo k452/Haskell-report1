@@ -9,6 +9,10 @@ recursion all@(x : xs) v
 
 foldlVersion :: [Int] -> Int -> Int
 foldlVersion [] _ = 0
-foldlVersion all@(x : xs) v
-  | null all = 0
-  | v == 0 = last all
+foldlVersion a v
+  | null a = 0
+  | v == 0 = last a
+  | otherwise = foldl culc v a
+
+culc :: Int -> Int -> Int
+culc a x = (x ^ (length a - 1)) * a
