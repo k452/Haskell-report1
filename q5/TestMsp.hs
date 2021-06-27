@@ -62,6 +62,15 @@ case6 =
         1000
     )
 
+case7 :: Test
+case7 =
+  TestCase
+    ( assertEqual
+        "[-3, -2, 4]"
+        (msp [-3, -2, 4])
+        24
+    )
+
 main :: IO Test.HUnit.Counts
 main =
   runTestTT
@@ -71,6 +80,7 @@ main =
           TestLabel "case3" case3,
           TestLabel "case4" case4,
           TestLabel "case5" case5,
-          TestLabel "case6" case6
+          TestLabel "case6" case6,
+          TestLabel "case7" case7
         ]
     )

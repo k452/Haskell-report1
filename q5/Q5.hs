@@ -17,11 +17,14 @@ msp :: [Int] -> Int
 msp [] = 0
 msp all@(x : xs)
   | length all == 1 = head all
-  | otherwise = max (msp xs) (calcProduct all)
+  | otherwise = max (msp xs) (calcProduct all x x)
 
-calcProduct :: [Int] -> Int
-calcProduct [] = 0
-calcProduct all@(x : xs)
+calcProduct :: [Int] -> Int -> Int -> Int
+calcProduct [] _ _ = 0
+calcProduct all@(x : xs) mini maxi
   | null all = 0
   | length all == 1 = head all
-  | otherwise = max x (x * calcProduct xs)
+  | otherwise = do
+    if x < 0
+      then max x (x * calcProduct xs (min x (maxi * x)) (max x (mini * x)))
+      else max x (x * calcProduct xs (min x (mini * x)) (max x (maxi * x)))

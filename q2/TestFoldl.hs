@@ -1,4 +1,4 @@
-import Q2 (foldlVersion)
+import Q2 (culcWrapper, foldlVersion)
 import Test.HUnit
   ( Assertable (assert),
     Counts,
@@ -44,6 +44,15 @@ case4 =
         0
     )
 
+case5 :: Test
+case5 =
+  TestCase
+    ( assertEqual
+        "null a[]"
+        (culcWrapper [10, 20, 30])
+        [(2, 10), (1, 20), (0, 30)]
+    )
+
 main :: IO Test.HUnit.Counts
 main =
   runTestTT
@@ -51,6 +60,7 @@ main =
         [ TestLabel "case1" case1,
           TestLabel "case2" case2,
           TestLabel "case3" case3,
-          TestLabel "case4" case4
+          TestLabel "case4" case4,
+          TestLabel "case5" case5
         ]
     )
